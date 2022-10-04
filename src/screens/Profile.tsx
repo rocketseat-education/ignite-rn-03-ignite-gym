@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Center, ScrollView, VStack, Skeleton } from 'native-base';
+import { TouchableOpacity } from 'react-native';
+import { Center, ScrollView, VStack, Skeleton, Text } from 'native-base';
 
 import { ScreenHeader } from '@components/ScreenHeader';
 import { UserPhoto } from '@components/UserPhoto';
@@ -34,6 +35,11 @@ export function Profile() {
               />
           }
           
+          <TouchableOpacity>
+            <Text color="green.500" fontWeight="bold" fontSize="md" mt={2} mb={8}>
+              Alterar Foto
+            </Text>
+          </TouchableOpacity>
         </Center>
       </ScrollView>
     </VStack>
