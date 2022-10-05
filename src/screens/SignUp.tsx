@@ -17,7 +17,7 @@ type FormDataProps = {
 
 export function SignUp() {
   
-  const { control, handleSubmit } = useForm<FormDataProps>();
+  const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>();
 
   const navigation = useNavigation();
 
@@ -67,6 +67,8 @@ export function SignUp() {
               />
             )}
           />
+
+          <Text color="white">{errors.name?.message}</Text>
 
           <Controller 
             control={control}
