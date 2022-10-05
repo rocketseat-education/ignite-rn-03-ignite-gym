@@ -17,18 +17,29 @@ export function Profile() {
   const [userPhoto, setUserPhoto] = useState('https://github.com/rodrigorgtic.png');
 
   async function handleUserPhotoSelected(){
-    const photoSelected = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-      aspect: [4, 4],
-      allowsEditing: true,
-    });
+    setPhotoIsLoading(true);
+    
+    try {
+      const photoSelected = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        aspect: [4, 4],
+        allowsEditing: true,
+      });
+  
+      if(photoSelected.cancelled) {
+        return;
+      }
 
-    if(photoSelected.cancelled) {
-      return;
+      if(photoSelected.uri) {
+        setUserPhoto(photoSelected.uri);
+      }
+  
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setPhotoIsLoading(false)
     }
-
-    setUserPhoto(photoSelected.uri);
   }
  
   return (
