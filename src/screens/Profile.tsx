@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Center, ScrollView, VStack, Skeleton, Text, Heading, useTheme } from 'native-base';
+import { Center, ScrollView, VStack, Skeleton, Text, Heading } from 'native-base';
+import * as ImagePicker from 'expo-image-picker';
 
 import { ScreenHeader } from '@components/ScreenHeader';
 import { UserPhoto } from '@components/UserPhoto';
@@ -14,6 +15,10 @@ export function Profile() {
 
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
 
+  async function handleUserPhotoSelected(){
+    await ImagePicker.launchImageLibraryAsync();
+  }
+ 
   return (
     <VStack flex={1}>
       <ScreenHeader title='Perfil' />
@@ -37,7 +42,7 @@ export function Profile() {
               />
           }
           
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleUserPhotoSelected}>
             <Text color="green.500" fontWeight="bold" fontSize="md" mt={2} mb={8}>
               Alterar Foto
             </Text>
